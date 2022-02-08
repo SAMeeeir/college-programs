@@ -14,14 +14,14 @@ class matrix{
 };
 
 void matrix :: getmatrix()
-{  cout<<"enter  %d matrix :";
+{  cout<<"enter  matrix :";
     
    for(int i =0; i<2; i++)
    {
       for(int j =0; j<2; j++)
       {
          cin>>a[i][j];
-         cout<<"\t";
+         
       }
       cout<<endl;
    }
@@ -42,6 +42,13 @@ void matrix :: display()
 matrix matrix :: operator *(matrix s)
 {
    matrix temp;
+    for(int i =0; i<2; i++)
+    {
+        for (int j =0 ; j<2; j++)
+        {
+            temp.a[i][j]=0;
+        }
+    }
    for(int i = 0; i<2; i++)
    {
       for(int j =0; j<2; j++)
