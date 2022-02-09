@@ -14,7 +14,7 @@ class matrix{
 };
 
 void matrix :: getmatrix()
-{  cout<<"enter  matrix :";
+{  
     
    for(int i =0; i<2; i++)
    {
@@ -63,9 +63,19 @@ matrix matrix :: operator *(matrix s)
 }
 int main()
 {
-   matrix a1,a2,a3;
-   a1.getmatrix();
-   a2.getmatrix();
-   a3 = a1*a2;
-   a3.display();
+   matrix s1,s2,s3;
+    cout<<"enter 1st  matrix is :";
+    cout<<endl;
+    s1.getmatrix();
+    cout<<"the  1st matrix is :";
+    cout<<endl;
+    s1.display();
+    cout<<"enter  2nd matrix is :";
+    cout<<endl;
+    s2.getmatrix();
+    cout<<"the  2nd matrix is :"<<endl;
+    s2.display();
+    s3 = s1*s2;
+    cout<<"the produect of two matrix is :"<<endl;
+    s3.display();
 }
