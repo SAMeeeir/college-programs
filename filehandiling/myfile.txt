@@ -1,0 +1,4 @@
+NAME :s
+rollno :2
+age :3
+address :r
