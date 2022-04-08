@@ -9,10 +9,9 @@ class person {
     char  name[50];
     char citizenshipno[30];
     char gender[10];
-    int age;
+    
     char profession[50];
     float temperature;
-    char diseases[100];
     char paddress[50];
     char taddress[100];
     char phoneno[30];
@@ -20,34 +19,38 @@ class person {
     char date[30];
 
 public:
+    int age;
     void getinformation();
     void conformation();
     void display();
     void savedata();
-    void view_all();
-    void show();
 
+
+    
 };
 void person::getinformation()
-{   system("clear");
+{   
     cout << "\n \t\t\t\tENTER YOUR  DETIALS  \n";
     cout << endl << "NAME :";
+    cin>>ws;
     cin.getline(name, 50);
     cout << endl << "CITIZENSHIP NO : ";
     cin >> citizenshipno;
     cout << endl << "AGE :";
-    cin >> age;
+    cin >> ws;
+    cin>>age;
     cout << endl << "GENDER (M FOR MALE AND F FOR FEMALE AND N FOR OTHERS) :";
-    cin >> gender;
+    cin >> ws;
+    cin.getline(gender,50);
     cout << endl << "PROFESSION :";
     cin >> ws;
     cin.getline(profession, 50);
     cout << endl << "TEMPERATURE (IN DEGREE CELCIOUS):";
     cin >> temperature;
-    cout << endl << "PERMANENT ADDRESS( EX : VDC-WARD NO-DISTRICT) :";
+    cout << endl << "PERMANENT ADDRESS :";
     cin >> ws;
     cin.getline(paddress,50);
-    cout << endl << "TEMPERARY ADDRESS(EX :VDC-WARD NO -DISTRICT) :";
+    cout << endl << "TEMPERARY ADDRESS :";
     cin.getline(taddress, 100);
     cout << endl << "CONTACT NO :";
     cin.getline(phoneno,30);
@@ -57,9 +60,7 @@ void person::getinformation()
     cout << endl << "VACCINATED DATE  ( EX : DAY-MONTH-YEAR) :";
     cin >> ws;
     cin.getline(date, 30);
-    cout << endl << "MENTION ANY PERMANENT DISEASES IF YOU HAVE :";
-    cin >> ws;
-    cin.getline(diseases, 100);
+    
 
 }
 
@@ -77,11 +78,11 @@ void person::display()
     cout << endl << "\t\t\tCONTACT NO :" << phoneno;
     cout << endl << "\t\t\tVACCINE NAME :" << vaccinename;
     cout << endl << "\t\t\tVACCINATED DATE :" << date;
-    cout << endl << "\t\t\tDISEASES :" << diseases;
+   
 
 }
 void person::conformation()
-{   system("clear");
+{  // system("clear");
     cout << "\n\n PLEASE CONFIRM YOUR DETIALS ";
     display();
     int b;
@@ -103,7 +104,6 @@ void person::conformation()
         cout << endl << "\t\t\t\t8. CONTACT NO";
         cout << endl << "\t\t\t\t9. VACCINE NAME";
         cout << endl << "\t\t\t\t10. VACCINATED DATE";
-        cout << endl << "\t\t\t\t11. DISEASES";
 
         cout << " \n\n ENTER NUMBER :";
         cin >> b;
@@ -117,7 +117,8 @@ void person::conformation()
             break;
         case 2:
             cout << " ENTER AGE:";
-            cin >> age;
+            cin>>ws;
+            cin>>age;
             break;
         case 3:
             cout << " ENTER CITIZENSHIP NO:";
@@ -126,6 +127,7 @@ void person::conformation()
             break;
         case 4:
             cout << " ENTER GENDER:";
+            cin>>ws;
             cin.getline(gender, 50);
             break;
         case 5:
@@ -157,11 +159,6 @@ void person::conformation()
             cin >> ws;
             cin.getline(date, 50);
             break;
-        case  11:
-            cout << "ENTER ANY PERMANENT DISEASES IF YOU HAVE :";
-            cin >> ws;
-            cin.getline(diseases, 50);
-            break;
         default:
             cout << endl << "PLEASE ENTER VALID NO. \n";
 
@@ -171,8 +168,7 @@ void person::conformation()
         cout << "\n DO YOU WANT TO EDIT DETIALS .\n";
         cout << "y/n";
         cin.get(yesorno);
-        char d = 'y';
-        if (yesorno == d)
+        if (yesorno == 'y')
         {
             goto here;
         }
@@ -187,6 +183,9 @@ void person::conformation()
 }
 void person::savedata()
 {  
+    char check;
+do
+{
     fstream fopen;
     fopen.open("data.txt",ios :: app | ios ::out);
     getinformation();
@@ -194,6 +193,10 @@ void person::savedata()
     fopen.write((char*)this, sizeof(person));
     cout << endl << "\n\n \t\t \tDATA IS SAVED ";
     fopen.close();
+    cout<<"\n\n \t\tDO YOU WANT TO ADD MORE DATA  (y/n) :";
+    cin>>check;
+    cout<<endl;
+}while(check == 'y');
     fstream vaccine; 
     vaccine.open("vaccinedata.txt",ios :: in);
     int a;
@@ -210,10 +213,31 @@ void person::savedata()
 
 }
 
+void readdata()
+{    int agee;
+   cout<<"\n enter age :";
+   cin>>agee;
+    person p;
+    fstream datain;
+    datain.open("data.txt",ios :: in);
+    while(datain.eof()==0)
+    {
+        datain.read((char*)&p,sizeof(p));
+        
+            if(p.age == agee)
+            {
+                p.display();
+                
+            }
+        
+    }
+}
+
 
 int main()
 {
     person x;
     x.savedata();
+    readdata();
   
 }

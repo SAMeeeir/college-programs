@@ -1,49 +1,67 @@
-#include<iostream>
-#inlcude<fstream>
+#include <iostream>
+#include <fstream>
+#include <cstring>
 using namespace std;
-class vaccinedata
-{   int f =0;
-    public :
-	void view_vaccine_stat;
+
+class person{
+	char name;
+	int rollno;
+	
+	int tauko;
+
+	public:
+	int age;
+	void getdata();
+	void display();
+	void savedata();
+	void displaydata();
 };
-     void vaccinedata::view_vaccine_stat
-    {
-    	cout<<"-----------------------------------------------------";
-    	cout<<"******************Vaccine Statistics*************";
-    	cout<<"------------------------------------------------------";
-
-    	int n;
-    	cout<<"\t Choose the option::";
-    	cout<<"\t\t 1. Add more no of Vaccine";
-    	cout<<"\t\t 2. View Available number of Vaccine";
-    	cout<<"\t\t 3. Exit";
-    	cin>>n;
-    	fstream file("vaccinedata.txt");
-
-    	switch(n)
-    	{
-    		case 1:
-    			int p;
-    			cout<<"\t Enter number of vaccines you want to add"<<endl;
-    			cin>>p;
-    			f=f+p;
-    			file.seekg(0);
-    			file<<f;
-    			cout<<"\t Now total number of vaccines are: "<<f+a;
-    			break;
-    		case 2:
-    			cout<<"\t Now total number of vaccines are: "<<a+f;
-    			break;
-    		case3:
-    			system("cls");
-    			default:
-    				cout<<"\n Enter Valid Options"
-		}
-		file.close();
-		
-    	
+void person :: getdata()
+{   cout<<"enter name :";
+    cin>>name;
+	cout<<"enter rollno :";
+	cin>>rollno;
+	cout<<endl <<"enter age :";
+	cin>>age;
+	cout<<endl<<"enter tauko :";
+	cin>>tauko;
+	cout<<endl;
 }
+void person :: display()
+{   cout<<name;
+	cout<<"rollno :"<<rollno;
+	cout<<"\n age :"<<age;
+	cout<<"\n tauko :"<<tauko;
+	cout<<endl;
+}
+void person :: savedata()
+{
+	fstream store;
+	store.open("tauko.txt",ios :: app | ios :: out);
+	store.write((char*)this,sizeof(this));
+	store.close();
+}
+
 int main()
 {
-    vaccinedata x;
+	person x;
+	x.getdata();
+	x.display();
+	x.savedata();
+		int p;
+	fstream infile;
+	person d;
+	infile.open("tauko.txt",ios :: in);
+	cout<<"enter age :";
+	cin>>p;
+	while(infile.eof()==0)
+	{
+		infile.read((char*)&d,sizeof(d));
+		
+			if(d.age == p)
+			{
+              d.display();
+			}
+		
+	}
 }
